@@ -1,0 +1,19 @@
+{
+    "name": "andres/rssonfly",
+    "description": "RSS on the fly",
+    "require": {
+        "fabpot/goutte": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Andres Mazza",
+            "email": "andres.mazza@gmail.com"
+        }
+    ],
+            
+    "minimum-stability": "dev"
+}
