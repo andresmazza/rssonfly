@@ -19,7 +19,7 @@ $page = 1;
 while ($crawler) {
 
         $crawler->filter('ol#searchResults > li.article')->each(function($node, $i) {
-
+      
 	$title = trim($node->filter('h3')->text());
 	$year  = trim($node->filter('ul.details > li.destaque > strong')->text());
 	$price = trim($node->filter('ul.details > li.costs > span.ch-price')->text());
