@@ -3,16 +3,11 @@
 require_once '../vendor/autoload.php';
 
 use Goutte\Client;
-use Symfony\Component\DomCrawler\Crawler;
 
 $client = new Client();
-//$url = 'http://deautos.com.ar/autos-usados-ford-ecosport-capital-federal/VTYY1WWMAYY371WWMOYY2664WWVKYY10000-100000WWPVYY19688';
-$url = '../deautos2.html';
-//$crawler = $client->request('GET', $url);
+$url = 'http://deautos.com.ar/autos-usados-ford-ecosport-capital-federal/VTYY1WWMAYY371WWMOYY2664WWVKYY10000-100000WWPVYY19688';
 
-$html = file_get_contents($url);
-$crawler = new Crawler();
-$crawler->addContent($html);
+$crawler = $client->request('GET', $url);
 
 $page = 1;
 
@@ -46,12 +41,9 @@ while ($crawler) {
 
 
                 $phone = "";
-
-
-                $desc = ""; //desc of product
-                //  $type = ""; //gasoline 
+                $desc = trim($node->filter('div.avisotabs > div.avisodet > span.txtcontad ')->text());
                 $type = trim($node->filter('div.avisotabs > div+div+div+div')->text());
-                printf("\n\n%d) %s\n %s\n %s $%s y:%s km:%s km\n %s %s type:%s\n", $c, $title, $url, $img, $price, $year, $km, $location, $phone, $type);
+                printf("\n\n%d) %s\n %s\n %s $%s y:%s km:%s km\n %s %s type:%s %ss\n", $c, $title, $url, $img, $price, $year, $km, $location, $phone, $type, $desc);
                 $c++;
                 $insert = "INSERT INTO item 
                     (url, title, desc, year, price, km, location, phone, img , type,createdAt) 
@@ -71,7 +63,7 @@ while ($crawler) {
                 $stmt->bindParam(':phone', $phone);
                 $stmt->bindParam(':img', $img);
                 $stmt->bindParam(':type', $type);
-                //   $stmt->execute();
+                $stmt->execute();
                 //   exit(0);
             });
 
@@ -105,11 +97,11 @@ while ($crawler) {
 
                 $phone = "";
 
+                $desc = trim($node->filter('div.avisotabs > div.avisodet > span.txtcontad')->text());
 
-                $desc = ""; //desc of product
                 //  $type = ""; //gasoline 
                 $type = trim($node->filter('div.avisotabs > div+div+div+div')->text());
-                printf("\n\n%d) %s\n %s\n %s $%s y:%s km:%s km\n %s %s type:%s\n", $c, $title, $url, $img, $price, $year, $km, $location, $phone, $type);
+                printf("\n\n%d) %s\n %s\n %s $%s y:%s km:%s km\n %s %s type:%s %ss\n", $c, $title, $url, $img, $price, $year, $km, $location, $phone, $type, $desc);
                 $c++;
                 $insert = "INSERT INTO item 
                     (url, title, desc, year, price, km, location, phone, img , type,createdAt) 
@@ -129,6 +121,7 @@ while ($crawler) {
                 $stmt->bindParam(':phone', $phone);
                 $stmt->bindParam(':img', $img);
                 $stmt->bindParam(':type', $type);
+                $stmt->execute();
             });
 
 
@@ -157,7 +150,8 @@ while ($crawler) {
                 $type = trim($node->filter('div.avisotabsimple > div+div+div+div')->text());
 
 
-                printf("\n\n%d) %s\n %s\n %s $%s y:%s km:%s km\n %s %s type:%s\n", $c, $title, $url, $img, $price, $year, $km, $location, $phone, $type);
+                printf("\n\n%d) %s\n %s\n %s $%s y:%s km:%s km\n %s %s type:%s %ss\n", $c, $title, $url, $img, $price, $year, $km, $location, $phone, $type, $desc);
+
                 $c++;
                 $insert = "INSERT INTO item 
                     (url, title, desc, year, price, km, location, phone, img , type,createdAt) 
@@ -177,10 +171,8 @@ while ($crawler) {
                 $stmt->bindParam(':phone', $phone);
                 $stmt->bindParam(':img', $img);
                 $stmt->bindParam(':type', $type);
+                $stmt->execute();
             });
-
-
-
 
 
     $link = $crawler->selectLink('Siguiente');
