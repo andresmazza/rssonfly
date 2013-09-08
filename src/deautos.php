@@ -43,7 +43,7 @@ while ($crawler) {
                 $phone = "";
                 $desc = trim($node->filter('div.avisotabs > div.avisodet > span.txtcontad ')->text());
                 $type = trim($node->filter('div.avisotabs > div+div+div+div')->text());
-                printf("\n\n%d) %s\n %s\n %s $%s y:%s km:%s km\n %s %s type:%s %ss\n", $c, $title, $url, $img, $price, $year, $km, $location, $phone, $type, $desc);
+                printf("\n\n%d) %s\n %s\n %s $%s y:%s km:%s km\n %s %s type:%s %s\n", $c, $title, $url, $img, $price, $year, $km, $location, $phone, $type, $desc);
                 $c++;
                 $insert = "INSERT INTO item 
                     (url, title, desc, year, price, km, location, phone, img , type,createdAt) 
@@ -101,7 +101,7 @@ while ($crawler) {
 
                 //  $type = ""; //gasoline 
                 $type = trim($node->filter('div.avisotabs > div+div+div+div')->text());
-                printf("\n\n%d) %s\n %s\n %s $%s y:%s km:%s km\n %s %s type:%s %ss\n", $c, $title, $url, $img, $price, $year, $km, $location, $phone, $type, $desc);
+                printf("\n\n%d) %s\n %s\n %s $%s y:%s km:%s km\n %s %s type:%s %s\n", $c, $title, $url, $img, $price, $year, $km, $location, $phone, $type, $desc);
                 $c++;
                 $insert = "INSERT INTO item 
                     (url, title, desc, year, price, km, location, phone, img , type,createdAt) 
@@ -150,7 +150,7 @@ while ($crawler) {
                 $type = trim($node->filter('div.avisotabsimple > div+div+div+div')->text());
 
 
-                printf("\n\n%d) %s\n %s\n %s $%s y:%s km:%s km\n %s %s type:%s %ss\n", $c, $title, $url, $img, $price, $year, $km, $location, $phone, $type, $desc);
+                printf("\n\n%d) %s\n %s\n %s $%s y:%s km:%s km\n %s %s type:%s %s\n", $c, $title, $url, $img, $price, $year, $km, $location, $phone, $type, $desc);
 
                 $c++;
                 $insert = "INSERT INTO item 
