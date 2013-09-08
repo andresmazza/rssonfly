@@ -1,12 +1,16 @@
-CREATE TABLE item (
+
+CREATE TABLE item  (
    id INTEGER PRIMARY KEY   AUTOINCREMENT,
    url           TEXT      NOT NULL UNIQUE,
-   desc          TEXT      NOT NULL,
-   year          CHAR(4)      NOT NULL,
-   price           CHAR(10)      NOT NULL,
-   km           CHAR(10)      NOT NULL,
+  title          TEXT      NOT NULL, 
+  desc          TEXT      NULL,
+   year          INT ,
+   price           BIGINT ,
+   km           BIGINT ,
    location          TEXT     NOT NULL,
    phone           CHAR(10)      NOT NULL,
-   img           TEXT      NOT NULL
+   img           TEXT     ,
+   type          CHAR(10) ,
+    createdAt TIMESTAMP
 
 );
