@@ -1,21 +1,23 @@
 <?php
 
-require_once '../vendor/autoload.php';
+require_once './bootstrap.php';
+
 
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
 $client = new Client();
+
 $url = 'http://autos.mercadolibre.com.ar/ford/ecosport/ford-ecosport_DisplayType_LF_PciaId_Capital-Federal_kilometers_10000-100000';
-//$url = 'test2.html';
-$crawler = $client->request('GET', $url);
-//$html = file_get_contents($url);
-//$crawler = new Crawler();
-//$crawler->addContent($html);
+$url = '../resource/ml2.html';
+//$crawler = $client->request('GET', $url);
+$html = file_get_contents($url);
+$crawler = new Crawler();
+$crawler->addContent($html);
 
 $page = 1;
 
-$db = new PDO('sqlite:/home/sanbox/rssonfly/data.sqlite');
+$db = new PDO(DSN);
 $c = 1;
 while ($crawler) {
 
@@ -61,7 +63,8 @@ while ($crawler) {
                 $stmt->bindParam(':location', $location);
                 $stmt->bindParam(':phone', $phone);
                 $stmt->bindParam(':img', $img);
-                $stmt->execute();
+                //$stmt->execute();
+                exit(0);
             });
 
     $link = $crawler->selectLink('Siguiente >');
