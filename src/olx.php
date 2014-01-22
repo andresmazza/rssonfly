@@ -17,7 +17,7 @@ $crawler = $client->request('GET', $url);
 $page = 1;
 
   
-$db = new PDO('sqlite:/home/sanbox/rssonfly/data.sqlite');
+$db = new PDO('sqlite:../data.sqlite');
 $c = 1;
 while ($crawler) {
 

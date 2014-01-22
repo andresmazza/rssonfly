@@ -9,20 +9,22 @@ use Symfony\Component\DomCrawler\Crawler;
 $client = new Client();
 
 $url = 'http://autos.mercadolibre.com.ar/ford/ecosport/ford-ecosport_DisplayType_LF_PciaId_Capital-Federal_kilometers_10000-100000';
-$url = '../resource/ml2.html';
-//$crawler = $client->request('GET', $url);
-$html = file_get_contents($url);
-$crawler = new Crawler();
-$crawler->addContent($html);
+//$url = '../resource/ml2.html';
+$crawler = $client->request('GET', $url);
+//$html = file_get_contents($url);
+//$crawler = new Crawler($html);
+//$crawler->addContent($html);
 
 $page = 1;
 
-$db = new PDO(DSN);
+$db = new PDO('sqlite:../data.sqlite');
 $c = 1;
+
 while ($crawler) {
 
     $crawler->filter('ol#searchResults > li.list-view-item')->each(function($node, $i)use ($db, &$c) {
-                $title = trim($node->filter('h3.list-view-item-title')->text());
+            
+                $title = trim($node->filter('h2.list-view-item-title')->text());
                 $url = trim($node->filter('a')->attr('href'));
                 $img = trim($node->filter('a > img')->attr('title'));
 
@@ -64,11 +66,10 @@ while ($crawler) {
                 $stmt->bindParam(':phone', $phone);
                 $stmt->bindParam(':img', $img);
                 //$stmt->execute();
-                exit(0);
+                //exit(0);
             });
 
     $link = $crawler->selectLink('Siguiente >');
-
 
     if (count($link)) {
         sleep(5);
